@@ -1,0 +1,416 @@
+@import url(//fonts.googleapis.com/earlyaccess/notosanstc.css);
+@mixin scrollbars($size, $foreground-color, $background-color) {
+     ::-webkit-scrollbar {
+        width: $size;
+        height: $size;
+    }
+     ::-webkit-scrollbar-thumb {
+        background: #fff;
+        cursor: pointer;
+    }
+}
+
+@include scrollbars(4px, #bad2de, transparent);
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 90vh;
+    background: linear-gradient(180deg, #114B5F 75%, #113a48 20%, #3a6c7d);
+    background-image: url(https://dble.bn-ent.net/ch/assets/img/top/img_hero_bg.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+ul,
+li {
+    padding: 0;
+    margin: 0;
+}
+
+i {
+    cursor: pointer;
+}
+
+.fas.fa-edit {
+    //實心
+    color: #fff;
+}
+
+.fas.fa-star {
+    //實心
+    color: #ffcc00;
+}
+
+ul,
+li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mynote {
+    left: 0;
+    top: 50%;
+    width: 30%;
+    transform: translateY(-50%);
+    position: absolute;
+    padding: 20px;
+    font-weight: 100;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.all {
+    position: relative;
+    margin: 80px 0;
+    width: 560px;
+    box-shadow: 0px 0px 10px #2edbff;
+    border: 1px solid #2edbff;
+    background-color: rgba(0, 0, 0, 0.58);
+}
+
+.header {
+    width: 560px;
+    height: 60px;
+    border-bottom: 1px solid #2edbff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    li {
+        cursor: pointer;
+        color: #fff;
+        letter-spacing: 1px;
+        font-size: 16px;
+        width: 33.3%;
+        height: 100%;
+        text-align: center;
+        line-height: 56px;
+    }
+    .on {
+        color: #00ffff;
+    }
+}
+
+.contain {
+    padding: 0px;
+    height: calc(100% - 70px);
+    overflow-y: auto;
+    position: relative;
+}
+
+.add_title {
+    letter-spacing: 2px;
+    padding: 0px 10px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 50px;
+    //box-shadow: 0px 0px 1px #888;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    i {
+        color: #fff;
+        margin: 0px 10px;
+    }
+    input[type="text"] {
+        width: 80%;
+        background: none;
+        color: #fff;
+        padding: 0px 15px;
+        font-family: 'Noto Sans TC', sans-serif;
+        border: none;
+        outline: 0;
+        font-size: 20px;
+    }
+     ::placeholder {
+        font-size: 20px;
+        letter-spacing: 4px;
+        color: #fff;
+    }
+}
+
+.addtask_btn {
+    cursor: pointer;
+    margin: 10px auto;
+    width: 95%;
+    color: #fff;
+    letter-spacing: 2px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    //box-shadow: 0px 0px 1px #888;
+}
+
+
+/*編輯區樣式*/
+
+.add_content {
+    width: 100%;
+    box-sizing: border-box;
+    //box-shadow: 0px 0px 1px #888;
+    .item_group {
+        color: #fff;
+        padding: 10px 40px 0px 40px;
+        box-sizing: border-box;
+        position: relative;
+        span {
+            margin: 0px 10px;
+            letter-spacing: 2px;
+        }
+        input {
+            margin: 10px 0;
+        }
+        textarea {
+            outline: none;
+            padding: 5px;
+            box-sizing: border-box;
+            margin-top: 10px;
+            width: 100%;
+            letter-spacing: 1px;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        .notice {
+            position: inherit;
+            display: inherit;
+            height: 20px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #fff;
+            padding: 5px 0px;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    .file {
+        width: 100%;
+        margin: 10px 0;
+        position: relative;
+        display: flex;
+        align-items: center;
+        .fa-plus-square {
+            font-size: 24px;
+            color: #aaa;
+            margin-left: 22px;
+            ;
+        }
+        .upload {
+            display: flex;
+            align-items: center;
+            input[type="file"] {
+                font-family: 'Noto Sans TC', sans-serif;
+                letter-spacing: 2px;
+                outline: none;
+                margin: 0px 10px;
+                opacity: 1;
+            }
+            i {
+                color: #fff;
+            }
+        }
+    }
+}
+
+
+/*編輯區樣式*/
+
+#add_newtask {
+    width: 95%;
+    margin: 10px auto;
+    border: 1px solid #fff;
+    background: #006d987a;
+    display: none;
+}
+
+#edit_task {
+    display: none;
+    .add_title {
+        box-shadow: none;
+    }
+    .add_content {
+        box-shadow: none
+    }
+}
+
+.content_btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    letter-spacing: 1px;
+    i {
+        margin: 0 10px;
+    }
+    .btn {
+        cursor: pointer;
+        width: 50%;
+        height: 40px;
+    }
+    #cancel {
+        color: #ff2e48;
+    }
+}
+
+.filter {
+    width: 95%;
+    margin: 5px auto;
+    display: flex;
+    justify-content: flex-end;
+    span {
+        cursor: pointer;
+        padding: 3px 5px;
+        background: rgba(255, 255, 255, 0);
+        font-size: 12px;
+        color: #fff;
+        margin: 0 5px;
+        border-radius: 2px;
+    }
+    .default {
+        background: #0a3160;
+        color: #fff;
+    }
+}
+
+.mytask {
+    margin: 0px auto;
+    padding: 10px 0;
+}
+
+.task {
+    border: 1px solid #fff;
+    color: #fff;
+    width: 95%;
+    border-radius: 2px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    margin: 0px auto 5px auto;
+    .todos {
+        display: flex;
+        align-items: center;
+        label {
+            position: relative;
+            color: #fff;
+            font-size: 14px;
+            padding: 0px 10px;
+            cursor: pointer;
+        }
+        .todotitle {
+            width: 100%;
+        }
+        input[type="checkbox"] {
+            position: relative;
+            opacity: 0;
+            &:checked~label>.checkmark {
+                border: 1px solid #00ffe9;
+                background: #00ffe9;
+            }
+            &:checked~label>.checkmark:after {
+                display: block;
+            }
+        }
+        .checkmark {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            position: absolute;
+            transition: .3s;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            &:after {
+                content: "";
+                position: absolute;
+                display: none;
+                left: 6px;
+                top: 2px;
+                width: 5px;
+                height: 10px;
+                border: solid white;
+                border-width: 0 3px 3px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+        }
+        i {
+            margin: 0px 5px
+        }
+        input[type="checkbox"] {
+            opacity: 0;
+        }
+    }
+    .note {
+        display: none;
+        margin-left: 30px;
+        p {
+            width: 340px;
+            font-size: 9px;
+            letter-spacing: 1px;
+            color: #fff;
+            word-wrap: break-word;
+        }
+    }
+    .info {
+        margin: 5px 0;
+        font-size: 12px;
+        i {
+            margin: 0px 5px;
+            color: #fff;
+            span {
+                margin: 0px 5px;
+                letter-spacing: 1px;
+                font-family: 'Noto Sans TC';
+            }
+        }
+    }
+}
+
+.remind {
+    margin: 50px;
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+}
+
+.markdone {
+    background: rgba(0, 64, 139, 0.62);
+    border: 1px solid #2edbff;
+    label {
+        text-decoration: line-through;
+    }
+    span {
+        text-decoration: line-through;
+    }
+}
+
+.copyright {
+    position: absolute;
+    padding: 20px;
+    bottom: 0px;
+    text-align: center;
+    color: #fff;
+    width: 500px;
+    font-weight: 100;
+    font-size: 14px;
+}

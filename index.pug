@@ -1,0 +1,123 @@
+.mynote
+  h1 筆記
+  h2 六角學院前端精神時光屋1/9
+  p 複習：html(pug) / css(css)
+  p 挑戰： vue　/ UI / 
+  p 未完成 : 排序 / 編輯 / 拖拉(SortableJS/Vue.Draggable)
+  
+.all#app
+  .header
+    li(:class="{'on':visi=='all'}" @click="visi='all'") 我的技能({{todos.length}})
+    li(:class="{'on':visi=='ing'}" @click="visi='ing'") 修練中({{ing}})
+    li(:class="{'on':visi=='done'}" @click="visi='done'") 已練成({{done}})
+  .contain
+    .addtask_btn(@click="show_editarea" v-if="visi=='all'")
+      p ＋　新增要修練的絕招
+    #add_newtask(v-if="visi=='all'")
+      .add_title
+        input(type="text" placeholder="輸入技能名稱" v-model="newTodo" @keyup.enter="addTodo")
+        i.far.fa-star(v-if="!newMark" @click="newMark = true")
+        i.fas.fa-star(v-if="newMark" @click="newMark = false")
+        i.fas.fa-edit
+      .add_content
+        .item_group
+          #deadline
+            .far.fa-calendar-alt
+            span 驗收日期(今天是{{today}})
+          input(type="date" v-model="newDate")
+          input(type="time" v-model="newTime")
+        .item_group
+          #addfile
+            i.far.fa-file
+            span 附加自拍照
+          .file
+            //i.fas.fa-plus-square
+            .upload
+              input(type="file" multiple)
+              i.fas.fa-plus-square
+        .item_group
+          #addcontent
+            i.far.fa-comment-dots
+            span 技能描述
+          textarea(rows="4" maxlength="80" v-model="newNote") 
+          .notice 剩餘{{80-newNote.length}}字
+        .content_btn
+          .btn#cancel(@click="hide_editarea")
+            i.fas.fa-times-circle 
+            span Cancel
+          .btn#save(@click="addTodo" ) Add
+            i.fas.fa-plus-circle
+            span
+    .filter(v-if="filter.length>0")
+      span(:class="{'default':order=='new'}" @click="order='new'") 最新優先
+      span(:class="{'default':order=='star'}" @click="order='star'") 已標記
+      span(:class="{'default':order=='deadline'}" @click="order='deadline'") 快到期優先        
+    .mytask
+      .task(v-for="(todo,index) in filter" :class="{'markdone':todo.completed}")
+        .todos
+          input(type="checkbox" :id="todo.id" v-model="todo.completed")
+          label(:for="todo.id") {{todo.today}}
+            sapn.checkmark
+          span.todotitle {{todo.todoTitle}}
+          i.fas.fa-star(v-if="todo.mark" @click="markstar(index)")
+          i.far.fa-star(v-if="!todo.mark" @click="markstar(index)")
+          i.far.fa-edit
+          i.far.fa-trash-alt(@click="removeTodo(index)")
+        .note 
+          p {{todo.note}}
+        .info
+          i.far.fa-calendar-alt(v-if="todo.date")
+            span {{todo.date}}  {{todo.time}}
+          i.far.fa-calendar(v-if="!todo.date")
+            span 沒有期限
+          i.far.fa-file(v-if="todo.file")
+          i.far.fa-comment-dots(v-if="todo.note" @click="shownote(index)")
+            span 查看筆記
+          i.far.fa-comment(v-if="!todo.note")
+            span 沒有筆記
+        #edit_task
+          .add_title
+            input(type="text")
+            i.far.fa-star
+          .add_content
+            .item_group
+              #deadline
+                .far.fa-calendar-alt
+                span 驗收日期
+              input(type="date")
+              input(type="time" value="13:30")
+            .item_group
+              #addfile
+                i.far.fa-file
+                span 附加自拍照
+              .file
+                i.fas.fa-plus-square
+                .upload
+                  input(type="file" multiple)
+                  i.fas.fa-plus-square
+            .item_group
+              #addcontent
+                i.far.fa-comment-dots
+                span 訓練筆記
+              textarea(rows="4" maxlength="80" v-model="newNote")  訓練龜派氣功
+              note 剩餘{{80-newNote.length}}字
+            .content_btn
+              .btn#cancel
+                i.fas.fa-times-circle 
+                span Cancel
+              .btn#save
+                i.fas.fa-plus-circle
+                span Save
+        
+      .remind(v-if="visi=='done'&&done==0")
+        p 至少學會龜派氣功吧！
+        p 我們可不是來玩的！(ಥ﹏ಥ)
+      .remind(v-if="visi=='ing'&&ing==0")
+        p 弗利沙：地球再過三分鐘就要爆炸了
+        p 導演：我們還有一個禮拜可以演
+        p 再多修練一招吧(ಥ﹏ಥ)  
+.copyright 
+  p 此網頁純屬個人練習作品，
+  p 圖片版權為《七龍珠 激戰傳說｜萬代南夢宮娛樂》所有
+      
+
